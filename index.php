@@ -8,5 +8,9 @@ $MyUser = $user->findById(1);
 // on recupère les informations sur un user (on hydrate le user)
 $user->hydrate(1);
 
-$m = new Mustache_Engine;
-echo $m->render('<div>Hello {{planet}}</div>', array('planet' => 'World!')); // "Hello World!"
+$te = new Template_Engine();
+
+$te->render_view('accueil', [
+    'page_title' => 'Accueil',
+    'test' => 'hello <ordl'
+]);
