@@ -1,7 +1,7 @@
 <?php
 
 // require des class nécéssaires
-require(__DIR__ . DIRECTORY_SEPARATOR . "Model.class.php");
+require(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Model.php");
 
 class User extends Model {
     
@@ -79,8 +79,7 @@ class User extends Model {
      * @param integer $id id du user a recuperer depuis la bdd
      */
     public function hydrate($id) {
-        $req = $this->_db->getInstance()->query("SELECT email, password, firstname, lastname, age, gender FROM users WHERE id={$id}");
-        $data = $req->fetchObject();
+        $data = $this->findById($id);
         
         $this->id = $id;
         $this->email = $data->email;

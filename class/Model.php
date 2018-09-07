@@ -27,6 +27,27 @@ abstract class Model {
         } else {
             $this->_db->getInstance()->query("UPDATE {$this->_table} SET {$param}=NULL WHERE {$close}");
         }
+
+        return true;
+    }
+
+    /**
+     * retourne toute les entrée de la table
+     *
+     * @return Array
+     */
+    public function findAll() {
+        return $this->_db->getInstance()->query("SELECT * FROM {$this->_table}")->fetchArray();
+    }
+
+    /**
+     * Retourne l'entrée de la table avec l'id passé en paramètre
+     *
+     * @param [integer] $id
+     * @return Object
+     */
+    public function findById($id) {
+        return $this->_db->getInstance()->query("SELECT * FROM {$this->_table} WHERE id='{$id}'")->fetchObject();
     }
     
 }

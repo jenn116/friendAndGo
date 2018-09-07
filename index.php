@@ -3,6 +3,7 @@ require(__DIR__  . DIRECTORY_SEPARATOR  . "conf" . DIRECTORY_SEPARATOR  . "confi
 
 // on initialise l'object User
 $user = new User($database);
+$MyUser = $user->findById(1);
 
 // on recupère les informations sur un user (on hydrate le user)
 $user->hydrate(1);
