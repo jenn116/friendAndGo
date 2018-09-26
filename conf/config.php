@@ -18,7 +18,7 @@ require(__DIR__  . DIRECTORY_SEPARATOR  . ".." . DIRECTORY_SEPARATOR  . "control
 require(__DIR__  . DIRECTORY_SEPARATOR  . ".." . DIRECTORY_SEPARATOR  . "models" . DIRECTORY_SEPARATOR  . "UserModel.php");
 
 // require des vendors
-require(__DIR__ . DIRECTORY_SEPARATOR  . ".."  . DIRECTORY_SEPARATOR  . "vendors" . DIRECTORY_SEPARATOR  . "mustachePHP" . DIRECTORY_SEPARATOR  . "bin" . DIRECTORY_SEPARATOR  . "build_bootstrap.php");
+require(__DIR__ . DIRECTORY_SEPARATOR  . ".."  . DIRECTORY_SEPARATOR  . "vendor" . DIRECTORY_SEPARATOR  . "mustachePHP" . DIRECTORY_SEPARATOR  . "bin" . DIRECTORY_SEPARATOR  . "build_bootstrap.php");
 
 // on se connecte a la base de donnée
 $database = new Base(DB_NAME, DB_USER, DB_PASS, DB_HOST, DB_PORT);

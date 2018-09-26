@@ -70,9 +70,14 @@ class Router {
         }
 
         //get the last item from the request url and parse the query string from it (if any)
-        $queryString = explode('?', end($b))[1];
-        parse_str($queryString, $params['query']);
+        $queryString = explode('?', end($b));
 
-        return $params;
+        if (isset($queryString[1])) {
+            $queryString = $queryString[1];
+            parse_str($queryString, $params['query']);
+            return $params;
+        }
+
+        return NULL;
     }
 }
