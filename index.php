@@ -39,6 +39,16 @@ Router::get('/accueil', function($urlParam) {
     $pages->index($urlParam);
 });
 
+Router::get('/connexion', function($urlParam) {
+    $pages = new PagesController();
+    $pages->connexion($urlParam);
+});
+
+Router::get('/inscription', function($urlParam) {
+    $pages = new PagesController();
+    $pages->inscription($urlParam);
+});
+
 
 // module users
 Router::get('/users/details', function($urlParam) {

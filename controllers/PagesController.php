@@ -6,4 +6,12 @@ class PagesController extends Controller {
         echo $this->render_view('pages/accueil', 'Accueil', []);
     }
 
+    public function connexion() {
+        echo $this->render_view('pages/connexion', 'Accueil', []);
+    }
+
+    public function inscription() {
+        echo $this->render_view('pages/inscription', 'Accueil', []);
+    }
+
 }
