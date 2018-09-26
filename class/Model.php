@@ -4,8 +4,13 @@ abstract class Model {
 
     protected $table; // la table dans la base
     
-    public function __construct() {
+    public function __construct($data = NULL) {
         $this->init();
+        if ($data !== NULL) {
+            foreach($data as $colonne => $valeur) {
+                $this->{$colonne} = $valeur;
+            }
+        }
     }
     
     /**
@@ -35,7 +40,8 @@ abstract class Model {
      * @return Array
      */
     public function findAll() {
-        return Base::getInstance()->query("SELECT * FROM {$this->table}")->fetchArray();
+        $model = ucfirst(substr($this->table, 0, -1)) . "Model";
+        return Base::getInstance()->query("SELECT * FROM {$this->table}")->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $model);
     }
 
     /**

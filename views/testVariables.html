@@ -1,7 +1,21 @@
-{{ getId }}
-{{ getLastname }}
-{{ getFirstname }}
-{{ getAge }}
-{{ getGender }}
-{{ getEmail }}
-{{ getPassword }}
+
+{{#users}}
+    {{ getId }}
+    {{ getLastname }}
+    {{ getFirstname }}
+    {{ getAge }}
+    {{ getGender }}
+    {{ getEmail }}
+    {{ getPassword }}
+    <br><br>
+{{/users}}
+
+{{#user}}
+    {{ getId }}
+    {{ getLastname }}
+    {{ getFirstname }}
+    {{ getAge }}
+    {{ getGender }}
+    {{ getEmail }}
+    {{ getPassword }}
+{{/user}}

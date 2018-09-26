@@ -23,17 +23,24 @@ $database = new Base();
 $db = $database->getInstance();
 
 // on déclare les routes et on défini quel méthode de quel controller utilisé
-Router::get('/', function() {
+Router::get('/', function($urlParam) {
     $pages = new PagesController();
-    $pages->index();
+    $pages->index($urlParam);
 });
 
-Router::get('/accueil', function() {
+Router::get('/accueil', function($urlParam) {
     $pages = new PagesController();
-    $pages->index();
+    $pages->index($urlParam);
 });
 
-Router::get('/users', function() {
+
+// module users
+Router::get('/users/list', function($urlParam) {
     $users = new UsersController();
-    $users->users();
+    $users->getList($urlParam);
+});
+
+Router::post('/users/edit', function($urlParam, $post) {
+    $users = new UsersController();
+    $users->postEdit($urlParam, $post);
 });

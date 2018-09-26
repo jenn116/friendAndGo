@@ -13,7 +13,28 @@ class Router {
         //get the url params and run the callback passing the params
         if($struct){
             $params = self::getParams($route, $_SERVER['REQUEST_URI']);
+
             $function->__invoke($params);
+
+            //prevent checking all other routes
+            die();
+        }
+    }
+
+    public static function post($route, $function){
+        //get method, don't continue if method is not the 
+        $method = $_SERVER['REQUEST_METHOD'];
+        if($method !== 'POST'){ return; }
+
+        //check the structure of the url
+        $struct = self::checkStructure($route, $_SERVER['REQUEST_URI']);
+
+        //if the requested url matches the one from the route
+        //get the url params and run the callback passing the params
+        if($struct){
+            $params = self::getParams($route, $_SERVER['REQUEST_URI']);
+            
+            $function->__invoke($params, $_POST);
 
             //prevent checking all other routes
             die();
@@ -34,6 +55,7 @@ class Router {
 
     public static function checkStructure($url1, $url2){
         list($a, $b) = self::urlToArray($url1, $url2);
+
         //if the sizes of the arrays don't match, their structures don't match either
         if(sizeof($a) !== sizeof($b)){
             return false;
@@ -41,11 +63,11 @@ class Router {
 
         //for each value from the route
         foreach ($a as $key => $value){
-
             //if the static values from the url don't match
             // or the dynamic values start with a '?' character
             //their structures don't match
-            if($value[0] !== ':' && $value !== $b[$key] || $value[0] === ':' && $b[$key][0] === '?'){
+            $b_uri = (strpos($b[$key], "?") === false) ? $b[$key] : substr($b[$key], 0, strpos($b[$key], "?"));
+            if($value[0] !== ':' && $value !== $b_uri || $value[0] === ':' && $b[$key][0] === '?'){
                 return false;
             }
         }
@@ -56,7 +78,6 @@ class Router {
 
     public static function getParams($url1, $url2){
         list($a, $b) = self::urlToArray($url1, $url2);
-
         $params = array('params' => array(), 'query' => array());
 
         //foreach value from the route
@@ -71,7 +92,6 @@ class Router {
 
         //get the last item from the request url and parse the query string from it (if any)
         $queryString = explode('?', end($b));
-
         if (isset($queryString[1])) {
             $queryString = $queryString[1];
             parse_str($queryString, $params['query']);
