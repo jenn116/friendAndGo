@@ -10,11 +10,13 @@ require(__DIR__ . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR  . "Model.
 
 // require des models
 require(__DIR__  . DIRECTORY_SEPARATOR . "models" . DIRECTORY_SEPARATOR  . "UserModel.php");
+require(__DIR__  . DIRECTORY_SEPARATOR . "models" . DIRECTORY_SEPARATOR  . "EventModel.php");
 require(__DIR__  . DIRECTORY_SEPARATOR . "models" . DIRECTORY_SEPARATOR  . "ActivityModel.php");
 
 // require des controllers
 require(__DIR__  . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR  . "PagesController.php");
 require(__DIR__  . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR  . "UsersController.php");
+require(__DIR__  . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR  . "EventsController.php");
 require(__DIR__  . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR  . "ActivitiesController.php");
 
 // require des vendors
@@ -50,6 +52,22 @@ Router::get('/users/list', function($urlParam) {
 Router::post('/users/edit', function($urlParam, $post) {
     $users = new UsersController();
     $users->postEdit($urlParam, $post);
+});
+
+// module events
+Router::get('/events/details', function($urlParam) {
+    $events = new EventsController();
+    $events->getDetails($urlParam);
+});
+
+Router::get('/events/list', function($urlParam) {
+    $events = new EventsController();
+    $events->getList($urlParam);
+});
+
+Router::post('/events/edit', function($urlParam, $post) {
+    $events = new EventsController();
+    $events->postEdit($urlParam, $post);
 });
 
 // module activities
