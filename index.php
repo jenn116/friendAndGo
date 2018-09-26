@@ -12,12 +12,14 @@ require(__DIR__ . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR  . "Model.
 require(__DIR__  . DIRECTORY_SEPARATOR . "models" . DIRECTORY_SEPARATOR  . "UserModel.php");
 require(__DIR__  . DIRECTORY_SEPARATOR . "models" . DIRECTORY_SEPARATOR  . "EventModel.php");
 require(__DIR__  . DIRECTORY_SEPARATOR . "models" . DIRECTORY_SEPARATOR  . "ActivityModel.php");
+require(__DIR__  . DIRECTORY_SEPARATOR . "models" . DIRECTORY_SEPARATOR  . "DepenseModel.php");
 
 // require des controllers
 require(__DIR__  . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR  . "PagesController.php");
 require(__DIR__  . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR  . "UsersController.php");
 require(__DIR__  . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR  . "EventsController.php");
 require(__DIR__  . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR  . "ActivitiesController.php");
+require(__DIR__  . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR  . "DepensesController.php");
 
 // require des vendors
 require(__DIR__ . DIRECTORY_SEPARATOR . "vendor" . DIRECTORY_SEPARATOR  . "mustachePHP" . DIRECTORY_SEPARATOR  . "bin" . DIRECTORY_SEPARATOR  . "build_bootstrap.php");
@@ -84,4 +86,20 @@ Router::get('/activities/list', function($urlParam) {
 Router::post('/activities/edit', function($urlParam, $post) {
     $activities = new ActivitiesController();
     $activities->postEdit($urlParam, $post);
+});
+
+// module depenses
+Router::get('/depenses/details', function($urlParam) {
+    $depenses = new DepensesController();
+    $depenses->getDetails($urlParam);
+});
+
+Router::get('/depenses/list', function($urlParam) {
+    $depenses = new DepensesController();
+    $depenses->getList($urlParam);
+});
+
+Router::post('/depenses/edit', function($urlParam, $post) {
+    $depenses = new DepensesController();
+    $depenses->postEdit($urlParam, $post);
 });
