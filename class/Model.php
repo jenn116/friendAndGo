@@ -53,5 +53,26 @@ abstract class Model {
     public function findById($id) {
         return Base::getInstance()->query("SELECT * FROM {$this->table} WHERE id={$id}")->fetchObject();
     }
+
+    /**
+     * Retourne l'entrée de la table avec la valeur de la colonne passé en param
+     *
+     * @param String $colonne
+     * @param String|Integer|Boolean $value
+     * @return Object
+     */
+    public function findOneBy($colonne, $value) {
+        return Base::getInstance()->query("SELECT * FROM {$this->table} WHERE {$colonne}={$id} LIMIT 1")->fetchObject();
+    }
+
+    /**
+     * Retourne l'entrée de la table avec la valeur de la colonne passé en param
+     *
+     * @param String $condition
+     * @return Array
+     */
+    public function findBy($condition, $jointure = "") {
+        return Base::getInstance()->query("SELECT * FROM {$this->table} {$jointure} WHERE $condition")->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $model);
+    }
     
 }

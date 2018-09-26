@@ -1,4 +1,3 @@
-
 <?php
 
 class EventsController extends Controller {

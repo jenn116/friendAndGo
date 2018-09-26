@@ -61,6 +61,21 @@ Router::get('/users/list', function($urlParam) {
     $users->getList($urlParam);
 });
 
+Router::post('/users/connect', function($urlParam, $post) {
+    $users = new UsersController();
+    $users->postConnect($urlParam, $post);
+});
+
+Router::get('/users/deconnect', function($urlParam) {
+    $users = new UsersController();
+    $users->getDeconnect($urlParam);
+});
+
+Router::post('/users/create', function($urlParam, $post) {
+    $users = new UsersController();
+    $users->postCreate($urlParam, $post);
+});
+
 Router::post('/users/edit', function($urlParam, $post) {
     $users = new UsersController();
     $users->postEdit($urlParam, $post);

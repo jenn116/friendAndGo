@@ -1,4 +1,3 @@
-
 <?php
 
 class ActivitiesController extends Controller {

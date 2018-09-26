@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 class UsersController extends Controller {
 
@@ -38,6 +39,48 @@ class UsersController extends Controller {
         }
 
         echo $this->render_view('testVariables', 'Test Variables', [ "user" => $user ], "layouts/dev");
+    }
+
+    public function postCreate($urlParams, $post) { // a finir
+        $user = new UserModel($post);
+        $user->hydrate($id);
+    
+        foreach($post as $colonne => $value) {
+            if ($colonne !== "id") {
+                $setter = "set" . ucfirst($colonne);
+                $user->{$setter}($value);
+            }
+        }
+
+        echo $this->render_view('testVariables', 'Test Variables', [ "user" => $user ], "layouts/dev");
+    }
+
+    public function postConnect($urlParams, $post) {
+        if (isset($post["email"]) && isset($post["password"])) {
+            $email = $post["email"];
+            $password = $post["password"];
+            $user = new UserModel();
+            $user = $user->findOneBy("email", $email);
+            
+            if ($user !== false) {
+                if ($password === $user->password) {
+                    $_SESSION["user"] = $user;
+                    header("Location: /events");
+                    // user connecté
+                }
+                header("Location: /connexion?erreur=\"mot de passe inconnue\"");
+                // mot de passe faux
+            }
+            header("Location: /connexion?erreur=\"email inconnue\"");
+            // email inconnnue
+        }
+        header("Location: /connexion?erreur=\"information invalide\"");
+        // requete invalide
+    }
+
+    public function getDeconnect($urlParams) {
+        session_destroy();
+        header("Location: /connexion?erreur=\"information invalide\"");
     }
 
 }

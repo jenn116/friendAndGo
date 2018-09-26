@@ -29,4 +29,14 @@ class Controller {
         ]);
     }
 
+    public function render_json($data) {
+        
+        $page = $this->engine->render($view, $data);
+
+        return $this->engine->render($layout, [
+            "pageTitle" => $pageTitle,
+            "page"      => $page
+        ]);
+    }
+
 }
