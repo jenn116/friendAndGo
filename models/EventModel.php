@@ -54,7 +54,7 @@ class EventModel extends Model {
      * initialise le model event
      */
     public function init() {
-        $this->table = 'event';
+        $this->table = 'events';
     }
     
     /**
