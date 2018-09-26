@@ -1,5 +1,4 @@
 <?php
-
 // require des class nécéssaires
 require(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Model.php");
 
