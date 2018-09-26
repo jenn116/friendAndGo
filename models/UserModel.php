@@ -1,8 +1,6 @@
 <?php
-// require des class nécéssaires
-require(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Model.php");
 
-class User extends Model {
+class UserModel extends Model {
     
     // les paramètres
     private $id;
@@ -18,6 +16,7 @@ class User extends Model {
         return $this->id;
     }
 
+    // email
     public function getEmail(){
         return $this->email;
     }
@@ -26,6 +25,7 @@ class User extends Model {
         $this->updateParam("email", $email, "id={$this->id}");
     }
 
+    // password
     public function getPassword(){
         return $this->password;
     }
@@ -34,6 +34,7 @@ class User extends Model {
         $this->updateParam("password", $password, "id={$this->id}");
     }
 
+    // firstname
     public function getFirstname(){
         return $this->firstname;
     }
@@ -42,6 +43,7 @@ class User extends Model {
         $this->updateParam("fistname", $firstname, "id={$this->id}");
     }
 
+    // lastname
     public function getLastname(){
         return $this->lastname;
     }
@@ -50,6 +52,7 @@ class User extends Model {
         $this->updateParam("lastname", $lastname, "id={$this->id}");
     }
 
+    // age
     public function getAge(){
         return $this->age;
     }
@@ -58,6 +61,7 @@ class User extends Model {
         $this->updateParam("age", $age, "id={$this->id}");
     }
 
+    // gender
     public function getGender(){
         return $this->gender;
     }
@@ -70,7 +74,7 @@ class User extends Model {
      * initialise le model users
      */
     public function init() {
-        $this->_table = 'users';
+        $this->table = 'users';
     }
     
     /**
