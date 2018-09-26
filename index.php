@@ -49,6 +49,11 @@ Router::get('/inscription', function($urlParam) {
     $pages->inscription($urlParam);
 });
 
+Router::get('/activity', function($urlParam) {
+    $pages = new PagesController();
+    $pages->activity($urlParam);
+});
+
 
 // module users
 Router::get('/users/details', function($urlParam) {

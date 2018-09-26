@@ -14,4 +14,8 @@ class PagesController extends Controller {
         echo $this->render_view('pages/inscription', 'Accueil', []);
     }
 
+    public function activity() {
+        echo $this->render_view('pages/activity', 'Accueil', []);
+    }
+
 }

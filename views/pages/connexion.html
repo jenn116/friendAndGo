@@ -1,31 +1,16 @@
-	<h1> Connectes-toi : <h1>  <!-- titre principale de la page -->
-		
-		<!--trouvez un moyen pour que l'utilisateur qui a déjà été connecté auparavant n'est pas à se re-loger.
-		
-		<p></p> 
-		
-		<form action="/ma-page-de-traitement" method="post"> <!-- déposer les élément du formulaire dans la base de données SQL associée -->
-		
-		<!--voir comment lié php et ce fichier-->
-		
-			<div>
-				<label for="mail">Identifiant ( ton E-mail) :</label> <!-- Texte déjà écrit -->
-				<input type="email" id="mail" name="email"> <!-- case à remplir -->
-			</div>
-			<div>
-				<label for="Password"> Mot de passe :</label> <!-- Texte déjà écrit -->
-				<input type="password" id="password" name="Password"> <!-- case à remplir -->
-			</div>
-			 
-			 
-			 
-			 <!-- Se connecter --> 
-			 
-			 <!-- If password ou email ne se trouve pas dans la base de donnée alors 
-				afficher un message d'erreur
-					else connecter l'utilisateur --> 
-								 
-				<input TYPE="submit" NAME="Submit" VALUE="Envoyer">
-			 
-			 
-		</form>
+<h1> Connectes-toi : <h1>  <!-- titre principale de la page -->
+
+<form action="/users/connect" method="post"> <!-- déposer les élément du formulaire dans la base de données SQL associée -->
+
+	<div>
+		<label for="mail">Identifiant ( ton E-mail) :</label> <!-- Texte déjà écrit -->
+		<input type="email" id="mail" name="email"> <!-- case à remplir -->
+	</div>
+	<div>
+		<label for="Password"> Mot de passe :</label> <!-- Texte déjà écrit -->
+		<input type="password" id="password" name="Password"> <!-- case à remplir -->
+	</div>
+						
+	<input TYPE="submit" NAME="Submit" VALUE="Envoyer">
+	
+</form>
