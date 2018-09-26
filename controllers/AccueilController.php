@@ -5,7 +5,7 @@ require(__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "class" . D
 class AccueilController extends Controller {
 
     public function index() {
-        echo $this->render_view('accueil', 'Accueil', []);
+        echo $this->render_view('pages/accueil', 'Accueil', []);
     }
 
 }

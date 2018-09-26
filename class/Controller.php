@@ -8,32 +8,24 @@ class Controller {
     private $engine;
     
     public function __construct() {
-        $this->layouts_path = __DIR__ . "/../views/layouts/";
-        $this->partials_path = __DIR__ . "/../views/partials/";
-        $this->pages_path = __DIR__ . "/../views/pages/";
+        $this->views_path = __DIR__ . "/../views";
+        $this->layouts_path = "{$this->views_path}/layouts";
+        $this->pages_path = "{$this->views_path}/pages";
+        $this->partials_path = "{$this->views_path}/partials";
+
+        $this->engine = new Mustache_Engine([
+            'loader'            => new Mustache_Loader_FilesystemLoader($this->views_path, array('extension' => '.html')),
+            'partials_loader'   => new Mustache_Loader_FilesystemLoader($this->partials_path, array('extension' => '.html'))
+        ]);
     }
     
-    public function render_view($view, $pageTitle, $data = []) {
-        $layout = file_get_contents($this->layouts_path . "default.mustache");
-        $head = file_get_contents($this->partials_path . "head.mustache");
-        $header = file_get_contents($this->partials_path . "header.mustache");
-        $footer = file_get_contents($this->partials_path . "footer.mustache");
-        $page = file_get_contents($this->pages_path . $view . ".mustache");
-        $partials = [
-            "head" =>$head,
-            "header" =>$header,
-            "footer" =>$footer
-        ];
+    public function render_view($view, $pageTitle, $data = [], $layout = "layouts/default") {
         
-        $this->engine = new Mustache_Engine([
-            'partials' => $partials
-        ]);
-        
-        $page = $this->engine->render($page, $data);
+        $page = $this->engine->render($view, $data);
 
         return $this->engine->render($layout, [
             "pageTitle" => $pageTitle,
-            "page" => $page
+            "page"      => $page
         ]);
     }
 
