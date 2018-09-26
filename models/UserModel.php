@@ -40,7 +40,7 @@ class UserModel extends Model {
     }
     public function setFirstname($firstname){
         $this->firstname = $firstname;
-        $this->updateParam("fistname", $firstname, "id={$this->id}");
+        $this->updateParam("firstname", $firstname, "id={$this->id}");
     }
 
     // lastname

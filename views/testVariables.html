@@ -19,3 +19,18 @@
     {{ getEmail }}
     {{ getPassword }}
 {{/user}}
+
+{{#activities}}
+    {{ getId }}
+    {{ getName }}
+    {{ getDate }}
+    {{ getEvent_id }}
+    <br><br>
+{{/activities}}
+
+{{#activity}}
+    {{ getId }}
+    {{ getName }}
+    {{ getDate }}
+    {{ getEvent_id }}
+{{/activity}}
