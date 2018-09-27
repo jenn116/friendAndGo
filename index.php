@@ -55,6 +55,11 @@ Router::get('/activity', function($urlParam) {
     $pages->activity($urlParam);
 });
 
+Router::get('/events', function($urlParam) {
+    $pages = new PagesController();
+    $pages->events($urlParam);
+});
+
 
 // module users
 Router::get('/users/details', function($urlParam) {

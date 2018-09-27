@@ -1,0 +1,45 @@
+<main>
+        <!-- titre principale de la page -->
+			<h1> Evénements <h1> 
+                
+    <!-- Contenu de la page -->
+                
+        <!-- Bouton de création de nouvelle activité -->
+                
+        <div class="d-flex flex-row-reverse bd-highlight">
+             <div class="p-1 bd-highlight"><a class="btn btn-primary active">+</div>
+            <div class="p-1 bd-highlight">Créer un nouvel Evenement</div>
+        </div>     
+                
+                
+        <!-- Liste d'activité -->        
+                 
+            
+            <h3> Evénements : <h3> 
+			
+        {{#openedEvents}}
+            <div class="d-flex flex-row bd-highlight mb-5">
+                <div class="p-2 bd-highlight">Flex item 1</div>
+                <div class="p-2 bd-highlight">Flex item 1</div>
+                <div class="p-2 bd-highlight">Flex item 1</div>
+                <div class="p-2 bd-highlight">Flex item 1</div>
+                <div class="p-2 bd-highlight">Flex item 1</div>
+                <div class="p-2 bd-highlight">Flex item 1</div>
+            </div> 
+        {{/openedEvents}}
+                
+			 <h3> Evénements Clotûrés: <h3> 
+                 
+        {{#closedEvents}}
+            <div class="d-flex flex-row bd-highlight mb-5">
+                <div class="p-2 bd-highlight">Flex item 2</div>
+                <div class="p-2 bd-highlight">Flex item 2</div>
+                <div class="p-2 bd-highlight">Flex item 2</div>
+                <div class="p-2 bd-highlight">Flex item 2</div>
+                <div class="p-2 bd-highlight">Flex item 2</div>
+                <div class="p-2 bd-highlight">Flex item 2</div>
+            </div> 
+        {{/closedEvents}}
+      
+       
+</main> 

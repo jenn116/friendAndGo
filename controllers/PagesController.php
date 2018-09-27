@@ -3,35 +3,62 @@
 class PagesController extends Controller {
 
     public function index($urlParam) {
-        echo $this->render_view('pages/accueil', 'Accueil', []);
+        $data = [];
+        if (isset($urlParam['query']['erreur'])) { $data["erreur"] = $urlParam['query']['erreur']; }
+        if (isset($_SESSION["user"])) { $data["currentUser"] = $_SESSION["user"]; }
+
+        echo $this->render_view('pages/accueil', 'Accueil', $data);
     }
 
     public function connexion($urlParam) {
         $data = [];
-        if (isset($urlParam['query']['erreur'])) {
-            $data["erreur"] = $urlParam['query']['erreur'];
-        }
+        if (isset($urlParam['query']['erreur'])) { $data["erreur"] = $urlParam['query']['erreur']; }
+
         if (isset($_SESSION["user"])) {
             header("Location: /events");
         } else {
-            echo $this->render_view('pages/connexion', 'Accueil', $data);
+            echo $this->render_view('pages/connexion', 'Connexion', $data);
         }
     }
 
     public function inscription($urlParam) {
         $data = [];
-        if (isset($urlParam['query']['erreur'])) {
-            $data["erreur"] = $urlParam['query']['erreur'];
+        if (isset($urlParam['query']['erreur'])) { $data["erreur"] = $urlParam['query']['erreur']; }
+        if (isset($_SESSION["user"])) { $data["currentUser"] = $_SESSION["user"]; }
+
+        echo $this->render_view('pages/inscription', 'Inscription', $data);
+    }
+
+    public function events($urlParam) {
+        $data = [];
+        if (isset($urlParam['query']['erreur'])) { $data["erreur"] = $urlParam['query']['erreur']; }
+        if (isset($_SESSION["user"])) { $data["currentUser"] = $_SESSION["user"]; }
+
+        $userEvents = Base::query("SELECT * FROM events INNER JOIN users_events on events.id = users_events.event_id WHERE users_events.user_id = {$_SESSION['user']->id}")->fetchAll(PDO::FETCH_ASSOC);
+
+        $openedEvents = [];
+        $closedEvents = [];
+        foreach($userEvents as $i => $event) {
+            if (strtotime($event["date_end"]) > time()) {
+                $openedEvents[] = $event;
+            } else {
+                $closedEvents[] = $event;
+                var_dump($event);
+            }
         }
-        echo $this->render_view('pages/inscription', 'Accueil', $data);
+        $data = [
+            "openedEvents" => $openedEvents,
+            "closedEvents" => $closedEvents
+        ];
+        echo $this->render_view('pages/events', 'Events', $data);
     }
 
     public function activity($urlParam) {
         $data = [];
-        if (isset($urlParam['query']['erreur'])) {
-            $data["erreur"] = $urlParam['query']['erreur'];
-        }
-        echo $this->render_view('pages/activity', 'Accueil', $data);
+        if (isset($urlParam['query']['erreur'])) { $data["erreur"] = $urlParam['query']['erreur']; }
+        if (isset($_SESSION["user"])) { $data["currentUser"] = $_SESSION["user"]; }
+
+        echo $this->render_view('pages/activity', 'Activity', $data);
     }
 
 }
