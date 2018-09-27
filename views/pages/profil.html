@@ -1,63 +1,22 @@
 <main></main>
-      <h1> Profil </h1>
-
+      <h1 class="mx-auto" style="width: 200px;"> Profil </h1>
+<br>
       <nav id="profiletabs">
-        <ul class="clearfix">
-          <li><a href="/profil" class="sel">Profil</a></li>
-          <li><a href="/activities">Activity</a></li>
-          <li><a href="/friends">Friends</a></li>
+        <ul class="nav nav-tabs">
+          <li class="nav-item"><a class="nav-link" href="profil" class="profil">Profil</a></li>
+          <li class="nav-item"><a class="nav-link disabled"href="friends">Amis</a></li>
         </ul>
       </nav>
+
       
       <section id="profil">
   
+        <p> Nom </p>
+        <p> Prenom </p>
+        <p> Email </p>
+        <p> Age </p>
+        <p> Sexe </p>
   
-  
-      </section>
-      
-      <section id="activity" class="hidden">
-        <p>Tes actions :</p>
-        
-      
-      </section>
-      
-      <section id="friends" class="hidden">
-        <p>Friends list:</p>
-        
-        <ul id="friendslist" class="clearfix">
-          <li><a href="#"><img src="images/avatar.png" > Username</a></li>
-        
-      </section>
-      
-      <section id="settings" class="hidden">
-        <p> Paramètres de ton compte </p>
-        
-        <p class="setting"><span>E-mail  <img src="images/edit.png" alt="*Edit*"></span> </p>
-            
-        <p class="setting"><span>Profile Status <img src="images/edit.png" alt="*Edit*"></span> Public</p>
-        
-        <p class="setting"><span>Update Frequency <img src="images/edit.png" alt="*Edit*"></span> Weekly</p>
-        
-        <p class="setting"><span>Connected Accounts <img src="images/edit.png" alt="*Edit*"></span> None</p>
-      </section>
-    </div><!-- @end #content -->
-  </div><!-- @end #w -->
-<script type="text/javascript">
-$(function(){
-  $('#profiletabs ul li a').on('click', function(e){
-    e.preventDefault();
-    var newcontent = $(this).attr('href');
-    
-    $('#profiletabs ul li a').removeClass('sel');
-    $(this).addClass('sel');
-    
-    $('#content section').each(function(){
-      if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
-    });
-    
-    $(newcontent).removeClass('hidden');
-  });
-});
-</script>
+ 
 
 </main>
