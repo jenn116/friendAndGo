@@ -1,12 +1,11 @@
 <main>
                 
-    <div class="d-flex p-2 bd-highlight justify-content-end">
- 
-        <div class="p-2 bd-highlight"><a class="btn btn-primary btn-lg active" href="/inscription" role="button">Inscris-toi</a></div>
-        <div class="p-2 bd-highlight"><a class="btn btn-primary btn-lg" href="/connexion" role="button">Connectes-toi</a>
+    {{^currentUser}}
+        <div class="d-flex p-2 bd-highlight justify-content-end">
+            <div class="p-2 bd-highlight"><a class="btn btn-primary btn-lg active" href="/inscription" role="button">Inscris-toi</a></div>
+            <div class="p-2 bd-highlight"><a class="btn btn-primary btn-lg" href="/connexion" role="button">Connectes-toi</a></div>
         </div>
-        
-     </div>
+    {{/currentUser}}
 			<h1 class="mx-auto" style="width: 200px;"> Actualités <h1>  <!-- titre principale de la page -->
             <br>
 		

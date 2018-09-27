@@ -1,36 +1,59 @@
- <main> 
-		
-<!-- Contenu de la page -->
-                
-        <!-- Bouton de création de nouvelle activité -->
-                
-    <div class="d-flex p-2 bd-highlight justify-content-end">
- 
-        <div class="p-2 bd-highlight">Créer une activité</div>
-        <div class="p-2 bd-highlight"><a class="btn btn-primary btn-lg" href="" role="button">+</a>
-        </div>
-        
-     </div>
-              
-        
-        <!-- titre principale de la page --> 
-            
-         <h1 class="mx-auto" style="width: 200px;"> Activités<h1>  
-             
-             <br>
-        <!-- Liste d'activité -->        
-                
-                  
-        <h3> Activités de l'événement : {{ event.name }}<h3> 
-        {{#activities}}
-             <div class="d-flex flex-row bd-highlight mb-5">
-                <div class="p-2 bd-highlight">Name</div>
-                <div class="p-2 bd-highlight">Date</div>
-            </div> 
-            <div class="d-flex flex-row bd-highlight mb-5">
-                <div class="p-2 bd-highlight">{{ name }}</div>
-                <div class="p-2 bd-highlight">{{ date }}</div>
-            </div> 
-        {{/activities}}
-       
-    </main> 
+<div class="d-flex p-2 bd-highlight justify-content-end"> 
+    <div class="p-2 bd-highlight">Créer une activité</div>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalCreateActivity">+</button>
+</div>
+
+<h1 class="mx-auto" style="width: 200px;"> Activités<h1> 
+
+<br>
+
+<h3> Activités de l'événement : {{ event.name }}<h3> 
+
+<ul class="list-group">
+    {{#activities}}
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col col-sm-8">{{ name }} - {{ date }}</div>
+                <div class="col col-sm-4 text-right"><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalEditEvent_{{ id }}">Edit</button></div>
+            </div>
+        </li>
+    {{/activities}}
+</ul>
+
+<!-- Modal -->
+<div class="modal fade" id="modalCreateActivity" tabindex="-1" role="dialog" aria-labelledby="modalCreateActivityTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <form action="/events/create" method="post">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCreateActivityTitle">Create event</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="eventName">Name</label>
+                    <input type="text" class="form-control" id="eventName" name="name" placeholder="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDateStart">date</label>
+                    <input type="datetime-local" class="form-control" id="eventDateStart" name="date_start" placeholder="name" required>
+                </div>
+                <div class="form-group">
+                    {{#event.users}}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ id }}" id="activityUser_{{ id }}" name="users">
+                            <label class="form-check-label" for="activityUser_{{ id }}">{{ email }}</label>
+                        </div>
+                    {{/event.users}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>

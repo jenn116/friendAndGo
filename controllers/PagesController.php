@@ -63,6 +63,8 @@ class PagesController extends Controller {
             $event = new EventModel();
             $event->hydrate($urlParam['query']['event_id']);
 
+            $event->users = Base::query("SELECT * FROM users INNER JOIN users_events on users.id = users_events.user_id WHERE users_events.event_id = {$event->getId()}")->fetchAll(PDO::FETCH_ASSOC);
+
             $activity = new ActivityModel();
             $eventActivities = $activity->findBy("event_id={$event->getId()}");
 

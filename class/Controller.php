@@ -25,7 +25,8 @@ class Controller {
 
         return $this->engine->render($layout, [
             "pageTitle" => $pageTitle,
-            "page"      => $page
+            "page"      => $page,
+            "data"      => $data
         ]);
     }
 
