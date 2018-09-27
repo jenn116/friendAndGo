@@ -40,4 +40,22 @@ class EventsController extends Controller {
         echo $this->render_view('testVariables', 'Test Variables', [ "activity" => $Event ], "layouts/dev");
     }
 
+    public function postCreate($urlParams, $post) {
+        if (isset($post["name"])
+            && isset($post["event_type"])
+            && isset($post["date_start"])
+        ) {
+            $event = new EventModel($post);
+            if ($event->create()) {
+                // deuxieme mot de passe different
+                header("Location: /events");
+            } else {
+                // deuxieme mot de passe different
+                header("Location: /events?erreur=erreur inconnue"); 
+            }
+        } else {
+            // formulaire incomplet
+            header("Location: /events?erreur=formulaire incomplet");
+        }
+    }
 }

@@ -69,5 +69,16 @@ class EventModel extends Model {
         $this->date_end = $data->date_end;
         $this->event_type = $data->event_type;
     }
+
+    /**
+     * creer une nouvelle entité dans la base
+     * @return Boolean
+     */
+    public function create() {
+        $newEventRequest = Base::getInstance()->query("INSERT INTO {$this->table} (name, event_type, date_start, date_end) VALUES ('{$this->name}', '{$this->event_type}', '{$this->date_start}', '{$this->date_end}')");
+        $newEventId = Base::getInstance()->lastInsertId();
+        Base::getInstance()->query("INSERT INTO users_events (user_id, event_id) VALUES ('{$_SESSION["user"]->id}', '{$newEventId}')");
+        return true;
+    }
     
 }
