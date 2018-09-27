@@ -43,7 +43,6 @@ class PagesController extends Controller {
                 $openedEvents[] = $event;
             } else {
                 $closedEvents[] = $event;
-                var_dump($event);
             }
         }
         $data = [

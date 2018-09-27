@@ -108,6 +108,11 @@ Router::post('/events/edit', function($urlParam, $post) {
     $events->postEdit($urlParam, $post);
 });
 
+Router::post('/events/create', function($urlParam, $post) {
+    $events = new EventsController();
+    $events->postCreate($urlParam, $post);
+});
+
 // module activities
 Router::get('/activities/details', function($urlParam) {
     $activities = new ActivitiesController();
