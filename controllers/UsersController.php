@@ -42,17 +42,33 @@ class UsersController extends Controller {
     }
 
     public function postCreate($urlParams, $post) { // a finir
-        $user = new UserModel($post);
-        $user->hydrate($id);
-    
-        foreach($post as $colonne => $value) {
-            if ($colonne !== "id") {
-                $setter = "set" . ucfirst($colonne);
-                $user->{$setter}($value);
-            }
-        }
+        if (isset($post["email"])
+            && isset($post["password"])
+            && isset($post["password1"])
+            && isset($post["lastname"])
+            && isset($post["firstname"])
+            && isset($post["age"])
+            && isset($post["gender"])
+        ) {
 
-        echo $this->render_view('testVariables', 'Test Variables', [ "user" => $user ], "layouts/dev");
+            if ($post["password"] === $post["password1"]) {
+                unset($post["password1"]);
+                $user = new UserModel($post);
+                if ($user->create()) {
+                    // deuxieme mot de passe different
+                    header("Location: /connexion"); 
+                } else {
+                    // deuxieme mot de passe different
+                    header("Location: /inscription?erreur=users deja inscrit"); 
+                }
+            } else {
+                // deuxieme mot de passe different
+                header("Location: /inscription?erreur=les deux mots de passe sont différent"); 
+            }
+        } else {
+            // formulaire incomplet
+            header("Location: /inscription?erreur=formulaire incomplet");
+        }
     }
 
     public function postConnect($urlParams, $post) {
@@ -61,26 +77,29 @@ class UsersController extends Controller {
             $password = $post["password"];
             $user = new UserModel();
             $user = $user->findOneBy("email", $email);
-            
+
             if ($user !== false) {
                 if ($password === $user->password) {
+                    // user connecté
                     $_SESSION["user"] = $user;
                     header("Location: /events");
-                    // user connecté
+                } else {
+                    // mot de passe faux
+                    header("Location: /connexion?erreur=mot de passe inconnue");
                 }
-                header("Location: /connexion?erreur=\"mot de passe inconnue\"");
-                // mot de passe faux
+            } else {
+                // email inconnnue
+                header("Location: /connexion?erreur=email inconnue");
             }
-            header("Location: /connexion?erreur=\"email inconnue\"");
-            // email inconnnue
+        } else {
+            // requete invalide
+            header("Location: /connexion?erreur=information invalide");
         }
-        header("Location: /connexion?erreur=\"information invalide\"");
-        // requete invalide
     }
 
     public function getDeconnect($urlParams) {
         session_destroy();
-        header("Location: /connexion?erreur=\"information invalide\"");
+        header("Location: /accueil");
     }
 
 }

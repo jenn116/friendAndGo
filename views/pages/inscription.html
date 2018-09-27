@@ -2,7 +2,7 @@
 		
 		<p></p> 
 		
-		<form action="/ma-page-de-traitement" method="post"> <!-- déposer les élément du formulaire dans la base de données SQL associée -->
+		<form action="/users/create" method="POST"> <!-- déposer les élément du formulaire dans la base de données SQL associée -->
 		
 			<div>
 				<label for="mail">E-mail:</label> <!-- Texte déjà écrit -->
@@ -36,9 +36,9 @@
 			
 			 <div>
 				<label for="gender"> Homme </label>
-				<input type="radio" id="name" name="" value= "homme">
+				<input type="radio" id="name" name="gender" value= "male">
 				<label for="gender"> Femme </label>
-				<input type="radio" id="name" name="gender" value= "femme">
+				<input type="radio" id="name" name="gender" value= "female">
 			</div>
 						 
 			 <!-- If email ou mot ne se trouve dans la base de donnée 
@@ -46,7 +46,7 @@
 			       if password contient au moins une lettre en majuscule et un chiffre et un caractère spéciale
 				   if password = password1 alors -->
 				   
-				   <input TYPE="submit" NAME="Submit" VALUE="Envoyer">
+				   <input TYPE="submit" value="Envoyer">
 				   <!--else 
 						<script language="JavaScript">
 						alert("Les mots de passes saisies ne sont pas identique". Merci de recommencer");
