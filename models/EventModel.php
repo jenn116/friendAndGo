@@ -74,10 +74,20 @@ class EventModel extends Model {
      * creer une nouvelle entité dans la base
      * @return Boolean
      */
-    public function create() {
+    public function create($eventUsers) {
         $newEventRequest = Base::getInstance()->query("INSERT INTO {$this->table} (name, event_type, date_start, date_end) VALUES ('{$this->name}', '{$this->event_type}', '{$this->date_start}', '{$this->date_end}')");
         $newEventId = Base::getInstance()->lastInsertId();
         Base::getInstance()->query("INSERT INTO users_events (user_id, event_id) VALUES ('{$_SESSION["user"]->id}', '{$newEventId}')");
+
+        $eventUsers = explode(" ", $eventUsers);
+        foreach($eventUsers as $eventUser) {
+            $user = new UserModel();
+            $eventUser = $user->findOneBy("email", $eventUser);
+            if ($eventUser !== false) {
+                Base::getInstance()->query("INSERT INTO users_events (user_id, event_id) VALUES ('{$eventUser->id}', '{$newEventId}')");
+            }
+        }
+
         return true;
     }
     

@@ -28,9 +28,18 @@ class EventsController extends Controller {
             $Event->hydrate($id);
     
             foreach($post as $colonne => $value) {
-                if ($colonne !== "id") {
+                if ($colonne !== "id" && $colonne !== "users") {
                     $setter = "set" . ucfirst($colonne);
                     $Event->{$setter}($value);
+                } else if ($colonne == "users") {
+                    $eventUsers = explode(" ", $value);
+                    foreach($eventUsers as $eventUser) {
+                        $user = new UserModel();
+                        $eventUser = $user->findOneBy("email", $eventUser);
+                        if ($eventUser !== false) {
+                            Base::getInstance()->query("INSERT INTO users_events (user_id, event_id) VALUES ('{$eventUser->id}', '{$newEventId}')");
+                        }
+                    }
                 }
             }
             
@@ -45,8 +54,10 @@ class EventsController extends Controller {
             && isset($post["event_type"])
             && isset($post["date_start"])
         ) {
+            $eventUsers = $post["users"];
+            unset($post["users"]);
             $event = new EventModel($post);
-            if ($event->create()) {
+            if ($event->create($eventUsers)) {
                 // deuxieme mot de passe different
                 header("Location: /events");
             } else {

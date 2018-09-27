@@ -39,6 +39,8 @@ class PagesController extends Controller {
         $openedEvents = [];
         $closedEvents = [];
         foreach($userEvents as $i => $event) {
+            $eventUsers = Base::query("SELECT * FROM users INNER JOIN users_events on users.id = users_events.user_id WHERE users_events.event_id = {$event["id"]}")->fetchAll(PDO::FETCH_ASSOC);
+            $event["users"] = $eventUsers;
             if (strtotime($event["date_end"]) > time()) {
                 $openedEvents[] = $event;
             } else {
