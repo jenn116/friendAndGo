@@ -1,4 +1,5 @@
 <?php
+session_start();
 // require de la config
 require(__DIR__  . DIRECTORY_SEPARATOR . "conf" . DIRECTORY_SEPARATOR  . "config.php");
 
@@ -32,22 +33,22 @@ $db = $database->getInstance();
 Router::get('/', function($urlParam) {
     $pages = new PagesController();
     $pages->index($urlParam);
-});
+}, false);
 
 Router::get('/accueil', function($urlParam) {
     $pages = new PagesController();
     $pages->index($urlParam);
-});
+}, false);
 
 Router::get('/connexion', function($urlParam) {
     $pages = new PagesController();
     $pages->connexion($urlParam);
-});
+}, false);
 
 Router::get('/inscription', function($urlParam) {
     $pages = new PagesController();
     $pages->inscription($urlParam);
-});
+}, false);
 
 Router::get('/activity', function($urlParam) {
     $pages = new PagesController();

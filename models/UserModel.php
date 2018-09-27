@@ -92,5 +92,13 @@ class UserModel extends Model {
         $this->age = $data->age;
         $this->gender = $data->gender;
     }
+
+    /**
+     * creer une nouvelle entité dans la base
+     * @return Boolean
+     */
+    public function create() {
+        return Base::getInstance()->query("INSERT INTO {$this->table} (email, password, lastname, firstname, age, gender) VALUES ('{$this->email}', '{$this->password}', '{$this->lastname}', '{$this->firstname}', '{$this->age}', '{$this->gender}')");
+    }
     
 }

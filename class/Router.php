@@ -1,7 +1,6 @@
 <?php
-
 class Router {
-    public static function get($route, $function){
+    public static function get($route, $function, $connectRequired = true){
         //get method, don't continue if method is not the 
         $method = $_SERVER['REQUEST_METHOD'];
         if($method !== 'GET'){ return; }
@@ -12,16 +11,18 @@ class Router {
         //if the requested url matches the one from the route
         //get the url params and run the callback passing the params
         if($struct){
-            $params = self::getParams($route, $_SERVER['REQUEST_URI']);
-
-            $function->__invoke($params);
-
-            //prevent checking all other routes
-            die();
+            if ($connectRequired && isset($_SESSION["user"]) || !$connectRequired) {
+                $params = self::getParams($route, $_SERVER['REQUEST_URI']);
+                $function->__invoke($params);
+                //prevent checking all other routes
+                die();
+            } else {
+                header("Location: /connexion");
+            }
         }
     }
 
-    public static function post($route, $function){
+    public static function post($route, $function, $connectRequired = true){
         //get method, don't continue if method is not the 
         $method = $_SERVER['REQUEST_METHOD'];
         if($method !== 'POST'){ return; }

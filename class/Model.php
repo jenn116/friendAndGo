@@ -8,7 +8,8 @@ abstract class Model {
         $this->init();
         if ($data !== NULL) {
             foreach($data as $colonne => $valeur) {
-                $this->{$colonne} = $valeur;
+                $colonne = "set" . ucfirst($colonne);
+                $this->{$colonne}($valeur);
             }
         }
     }
@@ -62,7 +63,7 @@ abstract class Model {
      * @return Object
      */
     public function findOneBy($colonne, $value) {
-        return Base::getInstance()->query("SELECT * FROM {$this->table} WHERE {$colonne}={$id} LIMIT 1")->fetchObject();
+        return Base::getInstance()->query("SELECT * FROM {$this->table} WHERE {$colonne}='{$value}' LIMIT 1")->fetchObject();
     }
 
     /**

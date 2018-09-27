@@ -1,3 +1,7 @@
+{{#erreur}}
+Erreur: {{.}}
+{{/erreur}}
+
 <h1> Connectes-toi : <h1>  <!-- titre principale de la page -->
 
 <form action="/users/connect" method="post"> <!-- déposer les élément du formulaire dans la base de données SQL associée -->
@@ -8,9 +12,9 @@
 	</div>
 	<div>
 		<label for="Password"> Mot de passe :</label> <!-- Texte déjà écrit -->
-		<input type="password" id="password" name="Password"> <!-- case à remplir -->
+		<input type="password" id="password" name="password"> <!-- case à remplir -->
 	</div>
 						
-	<input TYPE="submit" NAME="Submit" VALUE="Envoyer">
+	<input type="submit" value="Envoyer">
 	
 </form>
