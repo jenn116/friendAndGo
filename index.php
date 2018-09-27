@@ -60,6 +60,10 @@ Router::get('/events', function($urlParam) {
     $pages->events($urlParam);
 });
 
+Router::get('/profil', function($urlParam) {
+    $pages = new PagesController();
+    $pages->profil($urlParam);
+});
 
 // module users
 Router::get('/users/details', function($urlParam) {

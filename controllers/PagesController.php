@@ -75,4 +75,13 @@ class PagesController extends Controller {
         }
     }
 
+    public function profil($urlParam) {
+        $data = [];
+        if (isset($urlParam['query']['erreur'])) { $data["erreur"] = $urlParam['query']['erreur']; }
+
+        $data["currentUser"] = $_SESSION["user"];
+
+        echo $this->render_view('pages/profil', 'My profil', $data);
+    }
+
 }
