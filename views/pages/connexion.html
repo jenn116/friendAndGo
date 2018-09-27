@@ -1,20 +1,22 @@
-{{#erreur}}
-Erreur: {{.}}
-{{/erreur}}
-
+<main>
 <h1> Connectes-toi : <h1>  <!-- titre principale de la page -->
+<br>
+    <form action="/users/connect" method="post"> <!-- déposer les élément du formulaire dans la base de données SQL associée -->
+        
+        <div class="form-group">
+            <label for="mail">Identifiant ( ton E-mail) :</label> <!-- Texte déjà écrit -->
+            <br>
+            <input type="email" id="mail" name="email"> <!-- case à remplir -->
+        </div>
+        <div class="form-group">
+            <label for="Password"> Mot de passe :</label> <!-- Texte déjà écrit -->
+            <br>
+            <input type="password" id="password" name="password"> <!-- case à remplir -->
+        </div>
 
-<form action="/users/connect" method="post"> <!-- déposer les élément du formulaire dans la base de données SQL associée -->
+        <input type="submit" class="btn btn-primary mr-2" value="Envoyer">
+        <a href="/inscription" class="badge badge-secondary">Inscris-toi</a>
 
-	<div>
-		<label for="mail">Identifiant ( ton E-mail) :</label> <!-- Texte déjà écrit -->
-		<input type="email" id="mail" name="email"> <!-- case à remplir -->
-	</div>
-	<div>
-		<label for="Password"> Mot de passe :</label> <!-- Texte déjà écrit -->
-		<input type="password" id="password" name="password"> <!-- case à remplir -->
-	</div>
-						
-	<input type="submit" value="Envoyer">
-	
-</form>
+    </form>
+
+</main>

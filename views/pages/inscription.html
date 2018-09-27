@@ -1,12 +1,13 @@
+<main>
 <h1> Inscris-toi en remplissant ce formulaire : <h1>  <!-- titre principale de la page -->
-		
+<br>		
 		<p></p> 
 		
 		<form action="/users/create" method="POST"> <!-- déposer les élément du formulaire dans la base de données SQL associée -->
 		
 			<div>
-				<label for="mail">E-mail:</label> <!-- Texte déjà écrit -->
-				<input type="email" id="mail" name="email" value =""> <!-- case à remplir -->
+				<label for="mail" class="pr-1" >E-mail:</label> <!-- Texte déjà écrit -->
+				<input type="email" class="pr-1" id="mail" name="email" value =""> <!-- case à remplir -->
 			</div>
 			
 			 <div>
@@ -15,7 +16,7 @@
 			</div>
 			
 			<div>
-				<label for="password1"> Confirmer une nouvelle fois votre mot de passe </label>
+				<label for="password1"> Confirmer votre mot de passe : </label>
 				<input type="password1" id="mdp1" name="password1">
 			</div>
 			
@@ -40,37 +41,9 @@
 				<label for="gender"> Femme </label>
 				<input type="radio" id="name" name="gender" value= "female">
 			</div>
-						 
-			 <!-- If email ou mot ne se trouve dans la base de donnée 
-					if gender="" or  age="" or lastname="" or firsname=" or password1="" or password="" or email =""
-			       if password contient au moins une lettre en majuscule et un chiffre et un caractère spéciale
-				   if password = password1 alors -->
 				   
-				   <input TYPE="submit" value="Envoyer">
-				   <!--else 
-						<script language="JavaScript">
-						alert("Les mots de passes saisies ne sont pas identique". Merci de recommencer");
-						window.location.replace("___.php");
-						</script> 
-						-->
-					<!--else 
-						<script language="JavaScript">
-						alert("Il y a au moins une lettre en majuscule et un chiffre et un caractère spéciale. Merci de recommencer");
-						<!-- window.location.replace("___.php"); -->
-						</script> 
-						-->
-					<!--else 
-						<script language="JavaScript">
-						alert("Vous avez oublié de remplir un champ. Merci de recommencer");
-						window.location.replace("______.php");
-						</script> 
-						-->
-					<!--else 
-						<script language="JavaScript">
-						alert("Votre utilisateur n'existe pas dans notre base de données ou votre mot de passe n'est pas correct. Merci de recommencer, si le problème persiste veuillez nous contactez");
-						window.location.replace("a_______.php");
-						</script> 
-						-->
-				
-				<input type="button" value="Annuler" onclick="location.href='tonlien'" />
+				   <input type="submit" class="btn btn-primary mr-2" value="Envoyer">
+				   
+				<input type="button" class="btn btn-primary mr-2" value="Annuler" onclick="location.href='tonlien'" />
 		</form>
+</main>
