@@ -1,57 +1,44 @@
-<main>
-        <!-- titre principale de la page -->
-			<h1> Evénements <h1> 
-                
-    <!-- Contenu de la page -->
-                
-        <!-- Bouton de création de nouvelle activité -->
+<h1> Evénements <h1>                 
              
-    <div class="d-flex p-2 bd-highlight justify-content-end">
- 
-        <div class="p-2 bd-highlight">Créer un événement</div>
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter">+</button>
-        </div>
-        
-     </div>
+<div class="d-flex p-2 bd-highlight justify-content-end">
+
+    <div class="p-2 bd-highlight">Créer un événement</div>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalCreateEvent">+</button>
+    </div>
+
+</div>
                 
         <!-- Liste d'activité -->        
-               
-            <pre>
-            <h3> Evénements : <h3> 
-			
-        {{#openedEvents}}
-            <div class="d-flex flex-row bd-highlight mb-4">
-                <div class="p-2 bd-highlight">{{ name }}</div>
-                <div class="p-2 bd-highlight">{{ event_type }}</div>
-                <div class="p-2 bd-highlight">{{ date_start }}</div>
-                <div class="p-2 bd-highlight">{{ date_end }}</div>
-                <div class="p-2 bd-highlight"><a href="/activities?event_id={{ id }}">Voir les activités</a></div>
-            </div> 
-        {{/openedEvents}}
-                
-			 <h3> Evénements Clotûrés: <h3> 
-                 
-        {{#closedEvents}}
-            <div class="d-flex flex-row bd-highlight mb-4">
-                <div class="p-2 bd-highlight">{{ name }}</div>
-                <div class="p-2 bd-highlight">{{ event_type }}</div>
-                <div class="p-2 bd-highlight">{{ date_start }}</div>
-                <div class="p-2 bd-highlight">{{ date_end }}</div>
-                <div class="p-2 bd-highlight"><a href="/activities?event_id={{ id }}">Voir les activités</a></div>
-            </div> 
-        {{/closedEvents}}
-      
-       </pre>
-       
-</main> 
+<h3> Evénements : <h3> 
+<ul class="list-group">
+    {{#openedEvents}}
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col col-sm-8"><div>{{ event_type }}: {{ name }}</div><small>from {{ date_start }} to {{ date_end }}</small></div>
+                <div class="col col-sm-4">
+                    <a href="/activities?event_id={{ id }}">Voir les activités</a>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalEditEvent_{{ id }}">Edit</button>
+                </div>
+            </div>
+        </li>
+    {{/openedEvents}}
+</ul>
+    
+<h3> Evénements Clotûrés: <h3> 
+        
+<ul class="list-group">
+    {{#closedEvents}}
+        <li class="list-group-item">{{ event_type }}: {{ name }} - from {{ date_start }} to {{ date_end }} <a href="/activities?event_id={{ id }}">Voir les activités</a></li>
+    {{/closedEvents}}
+</ul>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="modalCreateEvent" tabindex="-1" role="dialog" aria-labelledby="modalCreateEventTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
         <form action="/events/create" method="post">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Create events</h5>
+                <h5 class="modal-title" id="modalCreateEventTitle">Create event</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -72,11 +59,16 @@
                 </div>
                 <div class="form-group">
                     <label for="eventDateStart">date start</label>
-                    <input type="date" class="form-control" id="eventDateStart" name="date_start" placeholder="name" required>
+                    <input type="datetime-local" class="form-control" id="eventDateStart" name="date_start" placeholder="name" required>
                 </div>
                 <div class="form-group">
                     <label for="eventDateEnd">date end</label>
-                    <input type="date" class="form-control" id="eventDateEnd" name="date_end" placeholder="name">
+                    <input type="datetime-local" class="form-control" id="eventDateEnd" name="date_end" placeholder="name">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventUsers">users</label>
+                    <input type="text" class="form-control" id="eventUsers" name="users" placeholder="users">
                 </div>
             </div>
             <div class="modal-footer">
@@ -87,3 +79,58 @@
     </div>
   </div>
 </div>
+
+{{#openedEvents}}
+    <div class="modal fade" id="modalEditEvent_{{ id }}" tabindex="-1" role="dialog" aria-labelledby="modalEditEventTitle_{{ id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="/events/edit" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditEventTitle_{{ id }}">Edit event</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" id="eventId" name="id" value="{{ id }}" hidden>
+                        <div class="form-group">
+                            <label for="eventName">Name</label>
+                            <input type="text" class="form-control" id="eventName" name="name" placeholder="name" value="{{ name }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventType">Type</label>
+                            <select class="form-control" id="eventType" name="event_type" value="{{ event_type }}">
+                                <option value="vacances" default>vacances</option>
+                                <option value="soirée">soirée</option>
+                                <option value="week-end">week-end</option>
+                                <option value="journée">journée</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventDateStart">date start</label>
+                            <input type="datetime-local" class="form-control" id="eventDateStart" name="date_start" value="{{ date_start }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventDateEnd">date end</label>
+                            <input type="datetime-local" class="form-control" id="eventDateEnd" name="date_end" value="{{ date_end }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventUsers">users</label>
+                            <input type="text" class="form-control" id="eventUsers" name="users" placeholder="users" value="">
+                        </div>
+                        <ul class="list-group">
+                            {{#users}}
+                                <li class="list-group-item"><small>{{ email }}</small> <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></li>
+                            {{/users}}
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{{/openedEvents}}
