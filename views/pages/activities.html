@@ -21,8 +21,12 @@
         <!-- Liste d'activité -->        
                 
                   
-        <h3> Activités de l'event: {{ event.name }}<h3> 
+        <h3> Activités de l'événement : {{ event.name }}<h3> 
         {{#activities}}
+             <div class="d-flex flex-row bd-highlight mb-5">
+                <div class="p-2 bd-highlight">Name</div>
+                <div class="p-2 bd-highlight">Date</div>
+            </div> 
             <div class="d-flex flex-row bd-highlight mb-5">
                 <div class="p-2 bd-highlight">{{ name }}</div>
                 <div class="p-2 bd-highlight">{{ date }}</div>
