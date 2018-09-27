@@ -53,7 +53,7 @@ class PagesController extends Controller {
         echo $this->render_view('pages/events', 'Events', $data);
     }
 
-    public function activity($urlParam) {
+    public function activities($urlParam) {
         $data = [];
 
         if (isset($urlParam['query']['event_id'])) {
@@ -63,16 +63,16 @@ class PagesController extends Controller {
             $event->hydrate($urlParam['query']['event_id']);
 
             $activity = new ActivityModel();
-            $eventActivities = Base::query("SELECT * FROM activites INNER JOIN events_activities on activites.id = events_activities.activity_id WHERE events_activities.event_id={$event->getId()}")->fetchAll(PDO::FETCH_ASSOC);
+            $eventActivities = $activity->findBy("event_id={$event->getId()}");
 
             $data = [
                 "event"         => $event,
                 "activities"    => $eventActivities
             ];
 
-            echo $this->render_view('pages/activity', 'Activity', $data);
+            echo $this->render_view('pages/activities', 'Activities', $data);
         } else {
-            echo $this->render_view('pages/activity', 'Activity', $data);
+            echo $this->render_view('pages/activities', 'Activities', $data);
         }
     }
 

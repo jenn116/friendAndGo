@@ -50,9 +50,9 @@ Router::get('/inscription', function($urlParam) {
     $pages->inscription($urlParam);
 }, false);
 
-Router::get('/activity', function($urlParam) {
+Router::get('/activities', function($urlParam) {
     $pages = new PagesController();
-    $pages->activity($urlParam);
+    $pages->activities($urlParam);
 });
 
 Router::get('/events', function($urlParam) {

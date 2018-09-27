@@ -66,7 +66,6 @@ class EventModel extends Model {
         
         $this->id = $id;
         $this->name = $data->name;
-        $this->date = $data->date;
         $this->date_end = $data->date_end;
         $this->event_type = $data->event_type;
     }

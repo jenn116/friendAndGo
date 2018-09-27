@@ -1,0 +1,28 @@
+ <main> 
+		
+<!-- Contenu de la page -->
+                
+        <!-- Bouton de création de nouvelle activité -->
+                
+        <div class="d-flex flex-row-reverse bd-highlight">
+             <div class="p-1 bd-highlight"><a class="btn btn-primary active">+</div>
+            <div class="p-1 bd-highlight"><a> Créer une nouvelle activité</a></div>
+        </div>   
+        
+        <!-- titre principale de la page --> 
+            
+         <h1 class="mx-auto" style="width: 200px;"> Activités<h1>  
+             
+             
+        <!-- Liste d'activité -->        
+                
+                  
+        <h3> Activités de l'event: {{ event.name }}<h3> 
+        {{#activities}}
+            <div class="d-flex flex-row bd-highlight mb-5">
+                <div class="p-2 bd-highlight">{{ name }}</div>
+                <div class="p-2 bd-highlight">{{ date }}</div>
+            </div> 
+        {{/activities}}
+       
+    </main> 

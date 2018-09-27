@@ -73,7 +73,7 @@ abstract class Model {
      * @return Array
      */
     public function findBy($condition, $jointure = "") {
-        return Base::getInstance()->query("SELECT * FROM {$this->table} {$jointure} WHERE $condition")->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $model);
+        return Base::getInstance()->query("SELECT * FROM {$this->table} {$jointure} WHERE {$condition}")->fetchAll(PDO::FETCH_ASSOC);
     }
     
 }
