@@ -55,10 +55,25 @@ class PagesController extends Controller {
 
     public function activity($urlParam) {
         $data = [];
-        if (isset($urlParam['query']['erreur'])) { $data["erreur"] = $urlParam['query']['erreur']; }
-        if (isset($_SESSION["user"])) { $data["currentUser"] = $_SESSION["user"]; }
 
-        echo $this->render_view('pages/activity', 'Activity', $data);
+        if (isset($urlParam['query']['event_id'])) {
+            if (isset($urlParam['query']['erreur'])) { $data["erreur"] = $urlParam['query']['erreur']; }
+            if (isset($_SESSION["user"])) { $data["currentUser"] = $_SESSION["user"]; }
+            $event = new EventModel();
+            $event->hydrate($urlParam['query']['event_id']);
+
+            $activity = new ActivityModel();
+            $eventActivities = Base::query("SELECT * FROM activites INNER JOIN events_activities on activites.id = events_activities.activity_id WHERE events_activities.event_id={$event->getId()}")->fetchAll(PDO::FETCH_ASSOC);
+
+            $data = [
+                "event"         => $event,
+                "activities"    => $eventActivities
+            ];
+
+            echo $this->render_view('pages/activity', 'Activity', $data);
+        } else {
+            echo $this->render_view('pages/activity', 'Activity', $data);
+        }
     }
 
 }
