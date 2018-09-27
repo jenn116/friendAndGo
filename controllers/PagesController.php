@@ -11,7 +11,11 @@ class PagesController extends Controller {
         if (isset($urlParam['query']['erreur'])) {
             $data["erreur"] = $urlParam['query']['erreur'];
         }
-        echo $this->render_view('pages/connexion', 'Accueil', $data);
+        if (isset($_SESSION["user"])) {
+            header("Location: /events");
+        } else {
+            echo $this->render_view('pages/connexion', 'Accueil', $data);
+        }
     }
 
     public function inscription($urlParam) {
